@@ -1,0 +1,38 @@
+<div class="row" style="margin-top: 25px">
+  <div class="z-depth-3">
+    <form class="col s12 m6 offset-m3" (ngSubmit)="create(cusForm.value)" #cusForm="ngForm">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="first_name" name="name" [(ngModel)]="name" type="text" class="validate">
+          <label for="first_name">Full Name</label>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="text" name="phone" [(ngModel)]="phone" maxlength="10" class="validate">
+          <label for="password">Phone #</label>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col s12">
+          <div class="input-field inline">
+            <input id="email" type="email" name="email" [(ngModel)]="email" class="validate">
+            <label for="email" data-error="wrong" data-success="right">Email</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="text" name="address" [(ngModel)]="address" class="validate">
+          <label for="email">Address</label>
+        </div>
+      </div>
+    
+      <button class="btn waves-effect waves-light" type="submit" name="action">Add customer</button>
+      <a router-link="/home" class="btn wave-effect red darken-3">Back</a>
+    </form>
+  </div>
+   
+  </div>

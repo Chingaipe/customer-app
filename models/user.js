@@ -6,7 +6,6 @@ const config = require('../config/database');
 const userSchema = mongoose.Schema({
     // fields of the user document
     name: { type: String, required: true},
-    username: { type: String, required: true},
     email: { type: String, required: true},
     password: { type: String, required: true},
     phone: { type: String }
@@ -29,7 +28,7 @@ module.exports.getUserByEmail = function(email, callback) {
 // gets a user by their phone number
 module.exports.getUserByPhone = function(phone, callback) {
     const query = {phone: phone};
-    USer.findOne(query, callback);
+    User.findOne(query, callback);
 }
 
 // adds data to db

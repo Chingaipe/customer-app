@@ -6,9 +6,17 @@ const router = express.Router();
 
 const Customer = require('../models/customer');
 
+router.get('/', (req, res, next) => {
+    Customer.getCustomers((err, customers) => {
+        if(err) res.send(err);
+
+        res.json(customers);
+    })
+});
+
 // get particular customer data
 router.get('/:customer_id', (req, res, next) => {
-    CV.getCustomerById(req.params.customer_id, (err, customer) => {
+    Customer.getCustomerById(req.params.customer_id, (err, customer) => {
         if(err) {
             console.log(err);
             res.send(err);
@@ -57,7 +65,11 @@ router.delete('/delete/:customer_id', (req, res) => {
         if (err) {
             res.send(err);
         }
-        res.json({success: true, msg: 'The customer record has been deleted successfully'});
+        res.json({
+            success: true, 
+            msg: 'The customer record has been deleted successfully',
+            customers: customer
+        });
     });
 });
 

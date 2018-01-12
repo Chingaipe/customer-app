@@ -5,7 +5,6 @@ const config = require('../config/database');
 const customerSchema = mongoose.Schema({
     // fields of the user document
     name: { type: String, required: true},
-    username: { type: String, required: true},
     email: { type: String, required: true},
     phone: { type: String },
     address: { type: String },
@@ -64,7 +63,7 @@ module.exports.editCustomer = function (customer_id, data, options, callback) {
         occupation: data.occupation
     }
 
-    Customer.findByOneAndUpdate(query, updateDits, options, callback);
+    Customer.findOneAndUpdate(query, updateDits, options, callback);
 }
 
 // deletes a customers record from the db

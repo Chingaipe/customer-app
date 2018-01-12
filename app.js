@@ -8,7 +8,10 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 
 // Connect to database
-mongoose.connect(config.database);
+mongoose.Promise = global.Promise;
+mongoose.connect(config.database, {
+    useMongoClient: true,
+});
 
 // On connection, if successful
 mongoose.connection.on('connected', () => {
@@ -46,7 +49,7 @@ app.use(bodyParser.json());
 
 // route paths
 app.use('/users', users);
-app.use('/customer', customers);
+app.use('/customers', customers);
 
 // handles listening to the specified port and starts server
 app.listen(port, () => {

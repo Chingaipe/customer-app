@@ -13,7 +13,6 @@ const User = require('../models/user');
 router.post('/register', (req, res, next) => {
     let newUser = new User({
         name: req.body.name,
-        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         phone: req.body.phone
@@ -35,7 +34,7 @@ router.post('/authenticate', (req, res, next) => {
     const phone = req.body.phone;
     const password = req.body.password;
 
-    User.getUserByPhone(email, (err, user) => {
+    User.getUserByPhone(phone, (err, user) => {
         if(err) throw err;
         if(!user) {
             return res.json({success: false, msg: 'User does not exist'});
@@ -44,7 +43,7 @@ router.post('/authenticate', (req, res, next) => {
         User.comparePassword(password, user.password, (err, isMatch) => {
             if(err) throw err;
             if(isMatch) {
-                const token = jwt.sign(user, config.secret, {
+                const token = jwt.sign({data: user}, config.secret, {
                     expiresIn: 604800  // 1 week(604800 sec) before token expires
                 });
 
