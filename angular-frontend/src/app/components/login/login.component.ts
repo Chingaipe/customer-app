@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   // form variables
   phone: string;
   password: string;
+  token: string;
+  user: any;
 
   constructor(
     private auth: AuthService,
@@ -25,14 +27,23 @@ export class LoginComponent implements OnInit {
 
   login(credentials) {
     this.auth.authenticateUser(credentials).subscribe(data => {
-      if (data.success === true) {
-        this.auth.storeUserData(data.token, data.user);
-        this.flashMessages.show('Welcome, you are now logged in as - ' + data.user.username ,
-          {cssClass: 'green lighten-1', timeout: 3000});
+      if (data['success'] === true) {
+        // stting variables
+        this.token = data['token'];
+        this.user = data['user'];
+
+        // storing data in localstorage
+        this.auth.storeUserData(this.token, this.user);
+        // welcome message
+        this.flashMessages.show('Welcome, you are now logged in as - ' + this.user['username'] ,
+          {cssClass: 'alert green lighten-1', timeout: 3000});
+
+          console.log(this.user['username']);
           // redirect to page
         this.router.navigate(['/home']);
       } else {
-        this.flashMessages.show(data.msg, {cssClass: 'alert-danger', timeout: 3000});
+        // error msg
+        this.flashMessages.show(data['msg'], {cssClass: 'alert red', timeout: 3000});
       }
     });
   }

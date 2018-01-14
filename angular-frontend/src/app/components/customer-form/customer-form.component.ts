@@ -25,17 +25,26 @@ export class CustomerFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  create(data) {
-    this.customerService.saveCustomer(data).subscribe(data => {
-      if (data.success) {
-        this.flashMessage.show(data.msg, {cssClass: 'alert green', timeout: 3000});
+  /**
+   * Creates a new customer record
+   * @param user THe details from the form
+   */
+  create(user) {
+
+    this.customerService.saveCustomer(user).subscribe(data => {
+
+      if (data['success']) {
+
+        this.flashMessage.show(data['msg'], {cssClass: 'alert green', timeout: 3000});
+
         this.router.navigate(['/home']); // redirects to categories page
       } else {
         // if not saved
-        this.flashMessage.show(data.msg, {cssClass: 'alert red', timeout: 3000});
+        this.flashMessage.show(data['msg'], {cssClass: 'alert red', timeout: 3000});
         this.router.navigate(['/customer/add']); // redirects to category form
       }
-    })
+
+    });
   }
 
 }

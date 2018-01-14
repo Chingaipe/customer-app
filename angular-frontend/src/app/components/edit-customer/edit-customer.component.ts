@@ -28,22 +28,26 @@ export class EditCustomerComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     // get the category from db
     this.customerService.getCustomer(this.id).subscribe(data => {
-      this.name = data.name;
-      this.phone = data.phone;
-      this.email = data.email;
-      this.address = data.address;
+      this.name = data['name'];
+      this.phone = data['phone'];
+      this.email = data['email'];
+      this.address = data['address'];
     });
   }
 
   update(customer) {
     this.customerService.updateCustomer(this.id, customer).subscribe(data => {
-      if(data.success) {
-        this.flashMessage.show(data.msg, {cssClass: 'alert green', timeout: 3000});
+
+      if (data['success']) {
+        this.flashMessage.show(data['msg'], {cssClass: 'alert green', timeout: 3000});
+
         this.router.navigateByUrl('/home');
       } else {
-        this.flashMessage.show(data.msg, {cssClass: 'alert red', timeout: 3000});
+        // error message
+        this.flashMessage.show(data['msg'], {cssClass: 'alert red', timeout: 3000});
         return;
       }
+
     });
   }
 

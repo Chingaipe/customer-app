@@ -40,7 +40,6 @@ module.exports.getCustomerByPhone = function(phone, callback) {
 module.exports.addCustomer = function (customer, callback) {
     const add = {
         name: customer.name,
-        username: customer.username,
         email: customer.email,
         phone: customerSchema.phone,
         address: customer.address,

@@ -42,7 +42,7 @@ router.post('/create', (req, res, next) => {
 
 // Update cv
 router.put('/update/:customer_id', (req, res) => {
-    const customer_id = req.params.user_id;
+    const customer_id = req.params.customer_id;
     const data = req.body;
 
     Customer.editCustomer(customer_id, data, {}, (err, customer) => {

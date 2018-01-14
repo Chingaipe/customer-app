@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
 
   signUp(data) {
     this.auth.registerUser(data).subscribe(data => {
-      if (data.success) {
+      if (data['success']) {
         this.flashMessages.show('Your are now registered and can sign in!',
           { cssClass: 'alert green', timeout: 3000 });
 
